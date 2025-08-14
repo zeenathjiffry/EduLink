@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login_page</title>
+    <link rel="stylesheet" href="asset/css/signup.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <main class="main_content">
+        <div class="left_content">
+
+        </div>
+        <div class="form_content">
+            
+                <h2>Sign Up With Your Email</h2>
+                <form>
+                    <input type="email" placeholder="Email" required/>
+                    <input type="password" placeholder="Password" required/>
+                    <select>
+                        <option>Student</option>
+                        <option>Admin</option>
+                        <option>Teacher</option>
+                        <option>Institute</option>
+                        <option>Marking Panel</option>
+                    </select>
+                    <button type="submit" class="continue">
+                        <i class="fa-regular fa-envelope"></i>
+                        <span class="iconmsg">Continue with email</span>
+                    </button>
+                    <p class="terms">By signing up, you agree to our <a href="#">Terms</a> and <a href="#">Privacy Policy</a></p>
+                    <button type="submit" class="login-link"><span>Already have an account? <a href="#"> Login in</a></span></button>
+                </form>
+            
+        </div>
+    </main>
+    <footer>
+        
+    </footer>
+</body>
+</html>
