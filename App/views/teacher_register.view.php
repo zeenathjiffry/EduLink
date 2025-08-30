@@ -1,7 +1,3 @@
-<?php include __DIR__ . '/component/nav.view.php';
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,17 +9,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
 </head>
 <body>
-    <nav class="navbar">
-        <div class="logo"></div>
-        <div class="search-bar-nav-links">
-            <input type="text" placeholder="Search here..." class="search-bar">
-            <div class="nav-links">
-                <a href="#" class="nav-btn">Log in</a>
-                <a href="#" class="nav-btn">Sign up</a>
-            </div>
-        </div>
-    </nav>
+    <?php include __DIR__ . '/component/nav.view.php';
 
+    ?>
     <main class="container">
         <section class="left-content">
             <h2>Teacher Account Setup</h2>

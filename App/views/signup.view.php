@@ -1,7 +1,3 @@
-<?php include __DIR__ . '/component/nav.view.php';
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,6 +9,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
+    <?php include __DIR__ . '/component/nav.view.php';
+
+    ?>
     <main class="main_content">
         <div class="left_content">
 
