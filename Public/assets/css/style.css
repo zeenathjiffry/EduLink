@@ -1,3 +1,5 @@
+@import url("variable.css");
+
 body {
   margin: 0;
   padding: 0;
@@ -18,7 +20,7 @@ body {
   padding: 20px 0;
 }
 .home-section h3 {
-  color: #000;
+  color: var(--text-primary);
   font-size: 32px;
   font-style: normal;
   font-weight: 600;
@@ -30,7 +32,7 @@ body {
   justify-content: space-evenly;
 }
 .home-section p {
-  color: #000;
+  color: var(--text-primary);
   font-size: 20px;
   font-style: normal;
   font-weight: 300;

@@ -1,0 +1,21 @@
+:root {
+  /* Brand Colors */
+  --color-primary: #0057b7;
+  --color-accent: #ffd700;
+  --color-dark: #333333;
+  --color-light: #f9f9f9;
+  --color-muted: #e0e0e0;
+
+  /* Text Colors */
+  --text-primary: #1e2a5e;
+  --text-secondary: #666666;
+
+  /* Button Colors */
+  --btn-bg: var(--color-primary);
+  --btn-text: #ffffff;
+  --btn-hover-bg: #0046a0;
+
+  /* Border and Shadow */
+  --border-color: var(--color-muted);
+  --box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
