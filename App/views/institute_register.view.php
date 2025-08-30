@@ -5,9 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Institute Registration</title>
   <link rel="stylesheet" href="../../Public/assets/css/institute_register.css">
+  <link rel="stylesheet" href="../../Public/assets/css/nav.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
+  <?php include __DIR__ . '/component/nav.view.php';
+
+  ?>
 
   <main class="container">
     <section class="form-section">
