@@ -4,9 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="../../Public/assets/css/admin.css" />
+    <link rel="stylesheet" href="<?php  echo ROOT ?>/assets/css/admin.css" />
+ 
   </head>
   <body>
+
     <aside class="sidebar">
       <div class="sidebar-header">Dashboard VLE</div>
       <ul class="nav-list">
@@ -26,6 +28,7 @@
     </aside>
 
     <div class="main-content">
+      
       <div id="analytics-view" class="content-section active">
         <h1 class="content-header">Analytics Overview</h1>
         <div class="kpi-row">
@@ -246,8 +249,6 @@
       
     </div>
 
-
-
-    <script src="../../Public/assets/js/admin.js"></script>
+    <script src="<?php  echo ROOT ?>/assets/js/admin.js"></script>
   </body>
 </html>

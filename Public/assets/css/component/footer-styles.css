@@ -15,10 +15,6 @@ body {
   background-color: #fff;
 }
 
-main.content-wrapper {
-  flex-grow: 1;
-}
-
 .footer-container {
   z-index: 2;
   background: linear-gradient(135deg, #2c3e7a 0%, #1e2951 100%);
