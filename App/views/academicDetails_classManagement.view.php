@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EduLink-Class-Academic Details</title>
-    <link rel="stylesheet" href="../../Public/assets/css/academic_details_classManagement.css">
-    <link rel="stylesheet" href="../../Public/assets/css/component/sidebar_classManagement.css">
-    <link rel="stylesheet" href="../../Public/assets/css/component/header_classManagement.css">
+    <link rel="stylesheet" href="<?php  echo ROOT ?>/assets/css/academic_details_classManagement.css">
+    <link rel="stylesheet" href="<?php  echo ROOT ?>/assets/css/component/sidebar_classManagement.css">
+    <link rel="stylesheet" href="<?php  echo ROOT ?>/assets/css/component/header_classManagement.css">
 
 </head>
 <body>
