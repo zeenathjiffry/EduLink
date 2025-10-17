@@ -1,6 +1,6 @@
 <?php
 
-class ClassController  extends Controller
+class classPage  extends Controller
 {
     public function index()
     {

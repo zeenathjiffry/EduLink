@@ -4,17 +4,31 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>EduLink - Teacher Dashboard</title>
-    <!-- Link to the new teacher CSS file -->
-    <link rel="stylesheet" href="../../Public/assets/css/profile.css" />
-    <!-- Font Awesome for icons -->
+        <link href="<?php  echo ROOT ?>/assets/css/component/nav.css" rel="stylesheet" />
+            <link
+      href="<?php  echo ROOT ?>/assets/css/component/footer-styles.css"
+      rel="stylesheet"
+    />
+        <link
+      rel="stylesheet"
+      href="<?php  echo ROOT ?>/assets/css/component/calander.css"
+    />
+    <link
+      rel="stylesheet"
+      href="<?php  echo ROOT ?>/assets/css/component/event.css"
+    />
+    <link rel="stylesheet" href="<?php  echo ROOT ?>/assets/css/profile.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
   </head>
+
   <body>
+        <header>
+        <?php include __DIR__.'/Component/nav.view.php'; ?>
+    </header>
     <div class="dashboard-layout">
-      <!-- Sidebar Navigation -->
       <aside class="sidebar">
         <nav class="sidebar-nav">
           <!-- Navigation links for the teacher profile -->
@@ -197,12 +211,14 @@
           <div class="content-header">
             <h1><i class="fa-regular fa-calendar"></i> My Calendar</h1>
             <p>This section is under construction.</p>
+            <?php include __DIR__.'/Component/calander.php'; ?>
           </div>
         </section>
       </main>
     </div>
-
-    <!-- Link to the new teacher JavaScript file -->
-    <script src="../../Public/assets/js/profile.js"></script>
+    <?php include __DIR__.'/Component/footer.view.php'; ?>
+      <script src="<?php  echo ROOT ?>/assets/js/calander.js"></script>
+  <script src="<?php  echo ROOT ?>/assets/js/event.js"></script>
+    <script src="<?php  echo ROOT ?>/assets/js/profile.js"></script>
   </body>
 </html>

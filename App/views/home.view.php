@@ -7,6 +7,10 @@
     <link href="<?php  echo ROOT ?>/assets/css/style.css" rel="stylesheet" />
     <link href="<?php  echo ROOT ?>/assets/css/component/nav.css" rel="stylesheet" />
     <link href="<?php  echo ROOT ?>/assets/css/component/card.css" rel="stylesheet" />   
+        <link
+      href="<?php  echo ROOT ?>/assets/css/component/footer-styles.css"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
   </head>
   <body>
@@ -116,6 +120,6 @@
       </div>
 
     </section>
-    
+    <?php include __DIR__.'/Component/footer.view.php'; ?>
   </body>
 </html>

@@ -12,6 +12,10 @@
       href="<?php  echo ROOT ?>/assets/css/component/nav.css"
       rel="stylesheet"
     />
+    <link
+      href="<?php  echo ROOT ?>/assets/css/component/footer-styles.css"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
@@ -44,5 +48,6 @@
             
         </div>
     </main>
+        <?php include __DIR__.'/Component/footer.view.php'; ?>
 </body>
 </html>

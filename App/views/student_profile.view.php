@@ -4,13 +4,29 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>EduLink - Student Dashboard</title>
-    <link rel="stylesheet" href="../../Public/assets/css/profile.css" />
+        <link href="<?php  echo ROOT ?>/assets/css/component/nav.css" rel="stylesheet" />
+    <link rel="stylesheet" href="<?php  echo ROOT ?>/assets/css/profile.css" />
+            <link
+      rel="stylesheet"
+      href="<?php  echo ROOT ?>/assets/css/component/calander.css"
+    />
+    <link
+      rel="stylesheet"
+      href="<?php  echo ROOT ?>/assets/css/component/event.css"
+    />
+                <link
+      href="<?php  echo ROOT ?>/assets/css/component/footer-styles.css"
+      rel="stylesheet"
+    />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
   </head>
   <body>
+            <header>
+        <?php include __DIR__.'/Component/nav.view.php'; ?>
+    </header>
     <div class="dashboard-layout">
       <aside class="sidebar">
         <nav class="sidebar-nav">
@@ -282,11 +298,14 @@
           </div>
           <div class="calendar-placeholder">
             <p>Your calendar will be displayed here.</p>
+            <?php include __DIR__.'/Component/calander.php'; ?>
           </div>
         </section>
       </main>
     </div>
-
-    <script src="../../Public/assets/js/profile.js"></script>
+     <?php include __DIR__.'/Component/footer.view.php'; ?>
+          <script src="<?php  echo ROOT ?>/assets/js/calander.js"></script>
+  <script src="<?php  echo ROOT ?>/assets/js/event.js"></script>
+    <script src="<?php  echo ROOT ?>/assets/js/profile.js"></script>
   </body>
 </html>

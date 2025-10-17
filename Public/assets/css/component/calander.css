@@ -7,15 +7,11 @@
   --line: #e6e9f0;
 }
 
-* {
-  box-sizing: border-box;
-}
 body {
   font-family: "Segoe UI", Roboto, Arial, sans-serif;
   background: var(--white);
   color: var(--primary);
   margin: 0;
-  padding: 24px;
 }
 
 /* container */

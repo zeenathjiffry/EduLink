@@ -4,9 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>EduLink - Institute Dashboard</title>
-    <!-- Link to the new institute CSS file -->
-    <link rel="stylesheet" href="../../Public/assets/css/profile.css" />
-    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="<?php  echo ROOT ?>/assets/css/profile.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -14,7 +12,6 @@
   </head>
   <body>
     <div class="dashboard-layout">
-      <!-- Sidebar Navigation -->
       <aside class="sidebar">
         <nav class="sidebar-nav">
           <!-- Navigation links for the institute profile -->
@@ -212,8 +209,7 @@
         </section>
       </main>
     </div>
-
-    <!-- Link to the new institute JavaScript file -->
+    <?php include __DIR__.'/Component/footer.view.php'; ?>
     <script src="../../Public/assets/js/profile.js"></script>
   </body>
 </html>

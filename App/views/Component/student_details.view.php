@@ -6,7 +6,7 @@
     <title>Student Profile - John Matthew</title>
     <link
       rel="stylesheet"
-      href="../../../Public/assets/css/student_details.css"
+      href="<?php  echo ROOT ?>/assets/css/student_details.css"
     />
   </head>
   <body>

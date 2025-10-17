@@ -35,7 +35,7 @@ body {
   width: var(--sidebar-width);
   background-color: var(--card-background);
   height: 100vh;
-  position: fixed;
+  position: absolute;
   border-right: 1px solid var(--border-color);
   padding-top: 2rem;
 }
@@ -44,6 +44,7 @@ body {
   margin-left: var(--sidebar-width);
   width: calc(100% - var(--sidebar-width));
   padding: 2rem;
+  padding-bottom: 13rem;
 }
 
 /* Sidebar Navigation */
