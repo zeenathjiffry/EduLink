@@ -5,10 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin Dashboard</title>
     <link rel="stylesheet" href="<?php  echo ROOT ?>/assets/css/admin.css" />
- 
+            <link
+      href="<?php  echo ROOT ?>/assets/css/component/footer-styles.css"
+      rel="stylesheet"
+    />
+    <link href="<?php  echo ROOT ?>/assets/css/component/nav.css" rel="stylesheet" />
   </head>
   <body>
+        <?php include __DIR__.'/Component/nav.view.php'; ?>
+ 
 
+  <div class="admin-layout">
     <aside class="sidebar">
       <div class="sidebar-header">Dashboard VLE</div>
       <ul class="nav-list">
@@ -247,8 +254,9 @@
         </div>
     </div>
       
-    </div>
-
+  </div>
+  </div>
+  <?php include __DIR__.'/Component/footer.view.php'; ?>
     <script src="<?php  echo ROOT ?>/assets/js/admin.js"></script>
   </body>
 </html>

@@ -5,6 +5,8 @@ class Model extends Database
     protected $table = 'users';
     protected $limit = 10;
     protected $offset = 0;
+    protected $rules = []; 
+    public $validation_errors = [];
 
     
     public function where($data, $data_not = [])
@@ -128,4 +130,47 @@ class Model extends Database
 
         return $this->query($query, $params);
     }
-}
+
+        public function validate($data)
+        {
+            $this->validation_errors = []; 
+
+            // Ensure rules are defined
+            if (empty($this->rules)) {
+                return true; 
+            }
+
+            foreach ($this->rules as $column => $rule_string) {
+                
+                // Check if column is present in the data for required checks
+                $is_present = array_key_exists($column, $data);
+                $value = $is_present ? $data[$column] : '';
+                $rules = explode('|', $rule_string);
+                
+                foreach ($rules as $rule) {
+                    
+                    // 1. REQUIRED Rule
+                    if ($rule === 'required' && (!$is_present || $value === '' || $value === null)) {
+                        $this->validation_errors[$column] = ucfirst(str_replace('_', ' ', $column)) . " is required.";
+                        break; // Stop checking this field if it's required and missing
+                    }
+                    
+                    // Continue with other checks only if the field is present and not empty
+                    if ($is_present && $value !== '' && $value !== null) {
+
+                        // 2. EMAIL Rule
+                        if ($rule === 'email' && !filter_var($value, FILTER_VALIDATE_EMAIL)) {
+                            $this->validation_errors[$column] = ucfirst(str_replace('_', ' ', $column)) . " is not a valid email format.";
+                        } 
+                        
+
+                        if (isset($this->validation_errors[$column])) {
+                            break;
+                        }
+                    }
+                }
+            }
+            
+            return empty($this->validation_errors);
+        }
+    }

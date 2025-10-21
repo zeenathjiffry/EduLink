@@ -48,7 +48,7 @@
               </button>
             </div>
 
-            <button class="btn new-class-btn">New Class</button>
+            <button class="btn new-class-btn"><a href="<?php  echo ROOT ?>/CreateClass">New Class</a></button>
           </div>
         </div>
 

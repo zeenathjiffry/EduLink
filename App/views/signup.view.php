@@ -28,16 +28,16 @@
         <div class="signup-form_content">
             
                 <h2>Sign Up With Your Email</h2>
-                <form>
+                <form id="signup-form" action= "<?php echo ROOT ?>/StudentRegister">
                     <input type="email" placeholder="Email" required/>
                     <input type="password" placeholder="Password" required/>
-                    <select>
-                        <option>Student</option>
-                        <option>Admin</option>
-                        <option>Teacher</option>
-                        <option>Institute</option>
-                        <option>Marking Panel</option>
-                    </select>
+                    <div class="custom-select-wrapper">
+                      <select class="custom-select" id="actor-select">
+                        <option value="student">Student</option>
+                        <option value="teacher">Teacher</option>
+                        <option value="institute">Institute</option>
+                      </select>
+                    </div>
                     <button type="submit" class="continue">
                         <i class="fa-regular fa-envelope"></i>
                         <span class="iconmsg">Continue with email</span>
@@ -49,5 +49,13 @@
         </div>
     </main>
         <?php include __DIR__.'/Component/footer.view.php'; ?>
+        <script>
+          const actionUrls = {
+            'student': '<?php echo ROOT ?>/StudentRegister',
+            'teacher': '<?php echo ROOT ?>/TeacherRegister',
+            'institute': '<?php echo ROOT ?>/InstituteRegister'
+          };
+      </script>
+        <script src="<?php  echo ROOT ?>/assets/js/signUp.js"></script>
 </body>
 </html>

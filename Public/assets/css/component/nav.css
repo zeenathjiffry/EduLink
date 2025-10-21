@@ -1,12 +1,15 @@
 @import url("../variable.css");
 
+.content-wrapper {
+  padding-top: 70px;
+}
+
 .navbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 24px;
+  padding: 0 24px;
   height: 70px;
-  min-height: 70px;
   box-shadow: var(--box-shadow);
   position: sticky;
   top: 0;
@@ -15,77 +18,147 @@
   z-index: 1000;
   background-color: #fff;
   box-sizing: border-box;
+  gap: 20px;
 }
+
+
 .navbar-logo {
-  width: 160px;
-  height: 80px;
-  border-radius: 4px;
-  overflow: hidden;
+  flex-shrink: 0;
 }
+
 .navbar-logo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  display: block;
+  width: 150px;
+  height: auto;
+  transition: transform 0.3s ease;
 }
-.navbar-search {
+
+.navbar-logo img:hover {
+  transform: scale(1.05); 
+}
+
+.navbar-right-section {
+  flex-grow: 1;
   display: flex;
   align-items: center;
-  gap: 20px;
-  flex: 1;
-  margin-left: 200px;
+  justify-content: flex-end; 
+  gap: 30px; 
 }
+
+.navbar-search-container {
+  position: relative;
+  flex-grow: 1;
+  max-width: 500px;
+}
+
+.navbar-search-icon {
+  position: absolute;
+  top: 50%;
+  left: 15px;
+  transform: translateY(-50%);
+  color: #aaa;
+  pointer-events: none; 
+}
+
 .navbar-search-bar {
-  flex: 1;
-  max-width: 600px;
-  padding: 8px 20px;
+  width: 100%;
+  padding: 10px 20px 10px 40px;
   border: 2px solid #ccc;
-  border-radius: 20px;
+  border-radius: 25px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  box-sizing: border-box;
 }
+
+.navbar-search-bar:focus {
+  outline: none;
+  border-color: var(--color-accent); 
+  box-shadow: 0 0 0 3px rgba(254, 211, 82, 0.4);
+}
+
+
 .navbar-links {
-  width: 55%;
   display: flex;
-  gap: 20px;
-  justify-content: flex-end;
+  align-items: center;
+  gap: 15px;
 }
-.navbar-btn {
-  padding: 8px 5px;
-  width: 90px;
+
+
+.navbar-btn,
+.navbar-link {
+  display: inline-block;
+  padding: 10px 20px;
   text-align: center;
-  background-color: var(--main-btn-bg);
-  color: var(--main-btn-text);
-  border-radius: 6px;
   font-weight: bold;
   text-decoration: none;
   cursor: pointer;
+  white-space: nowrap;
+  border-radius: 8px;
+  border: 2px solid transparent;
+  transition: transform 0.2s ease, box-shadow 0.2s ease,
+    background-color 0.2s ease, color 0.2s ease;
 }
-.navbar-secondary-btn {
+
+.navbar-btn:hover {
+  transform: translateY(-2px); 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+.navbar-btn.navbar-primary-btn,
+.navbar-links a[href*="signup"].navbar-btn {
+  background-color: var(--main-btn-bg);
+  color: var(--main-btn-text);
+}
+
+.navbar-btn.navbar-secondary-btn {
   background-color: var(--secondery-btn-bg);
   color: var(--main-btn-text);
-  border-radius: 6px;
   border: var(--secondery-btn-border);
 }
-.navbar-btn:hover {
-  background-color: white;
-  color: black;
+.navbar-btn.navbar-secondary-btn:hover {
+  background-color: #f0f0f0; 
 }
+
+.navbar-link {
+  color: var(--text-primary);
+  padding: 10px 15px;
+}
+.navbar-link:hover {
+  color: var(--text-primary);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+
 .navbar-profile-icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 42px;
-  height: 42px;
-  background-color: #f1f5f9; /* A light, neutral grey */
-  border-radius: 50%; /* Makes it a circle */
+  width: 44px;
+  height: 44px;
+  background-color: var(--color-primary); 
+  border-radius: 50%;
   cursor: pointer;
-  transition: background-color 0.2s ease-in-out;
-  text-decoration: none;
-  margin-left: 10px; /* Adds some space from the buttons */
+  transition: transform 0.2s ease, box-shadow 0.2s ease,
+    background-color 0.2s ease;
 }
+
 .navbar-profile-icon:hover {
-  background-color: #e2e8f0; /* Slightly darker on hover */
+  background-color: var(--color-accent); 
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
 .navbar-profile-icon svg {
   width: 24px;
   height: 24px;
-  color: #475569; /* A muted dark grey for the icon stroke */
+  color: #fff; 
+  transition: color 0.2s ease;
+}
+
+.navbar-profile-icon:hover svg {
+  color: var(
+    --main-btn-text
+  );
 }
