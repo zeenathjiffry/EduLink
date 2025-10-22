@@ -25,24 +25,28 @@
     <main class="teach-reg-container">
       <section class="teach-reg-left-content">
         <h2>Teacher Account Setup</h2>
-        <form>
+        
+        <form method="POST" action="<?php echo ROOT ?>/signup/save_teacher_details" enctype="multipart/form-data">
+          
           <div class="teach-reg-name-row">
             <input
               type="text"
+              name="first_name"
               placeholder="First Name"
               class="input-half"
               required
             />
             <input
               type="text"
+              name="last_name"
               placeholder="Last Name"
               class="input-half"
               required
             />
           </div>
-          <input type="text" placeholder="Email" required />
-          <input type="text" placeholder="Phone Number" required />
-          <select required>
+          <input type="email" name="contact_email" placeholder="Contact Email" required />
+          <input type="tel" name="phone" placeholder="Phone Number" required />
+          <select name="subject" required>
             <option value="" disabled selected>Select Subject</option>
             <option>Physics</option>
             <option>Chemistry</option>
@@ -64,7 +68,7 @@
             </ul>
           </div>
 
-          <input type="file" id="file-upload-input" multiple hidden />
+          <input type="file" name="files[]" id="file-upload-input" multiple hidden />
 
           <label for="file-upload-input" class="upload-box" id="upload-box">
             <div class="upload-icon">

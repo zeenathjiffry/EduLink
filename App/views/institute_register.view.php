@@ -22,13 +22,15 @@
     <main class="inst-reg-container">
       <section class="inst-reg-form-section">
         <h2>Institute Account Setup</h2>
-        <form>
-          <input type="text" placeholder="Institute Name" required />
-          <input type="text" placeholder="Institute Address" required />
-          <input type="email" placeholder="Email" required />
-          <input type="tel" placeholder="Phone number" required />
+        
+        <form method="POST" action="<?php echo ROOT ?>/signup/save_institute_details" enctype="multipart/form-data">
+          
+          <input type="text" name="institute_name" placeholder="Institute Name" required />
+          <input type="text" name="address" placeholder="Institute Address" required />
+          <input type="email" name="contact_email" placeholder="Email" required />
+          <input type="tel" name="phone" placeholder="Phone number" required />
 
-          <input type="file" id="file-upload-input" multiple hidden />
+          <input type="file" name="files[]" id="file-upload-input" multiple hidden />
 
           <label for="file-upload-input" class="upload-box" id="upload-box">
             <div class="upload-icon">

@@ -24,85 +24,75 @@
       <!-- ============================================= -->
       <!-- ============== CLASSES SECTION ============== -->
       <!-- ============================================= -->
-  <section class="class-section">
-  <div class="header-container">
-    <h1 class="section-title">Classes</h1>
+      <section class="class-section">
+        <div class="header-container">
+          <h1 class="section-title">Classes</h1>
 
-    <div class="controls-container">
-      <div class="search-wrapper">
-        <input type="search" class="search-bar" placeholder="Search" />
-        <button class="search-btn">
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="white"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <circle cx="11" cy="11" r="8"></circle>
-            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-          </svg>
-        </button>
-      </div>
+          <div class="controls-container">
+            <div class="search-wrapper">
+              <input type="search" class="search-bar" placeholder="Search" />
+              <button class="search-btn">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="white"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+              </button>
+            </div>
 
-      <button class="btn new-class-btn">
-        <a href="<?php echo ROOT ?>/CreateClass">New Class</a>
-      </button>
-    </div>
-  </div>
-
-  <!-- ✅ Loop starts here -->
-  <?php if (!empty($classes)): ?>
-    <?php foreach ($classes as $class): ?>
-      <div class="class-card">
-        <!-- The blue trapezium overlay (hidden by default) -->
-        <div class="card-overlay">
-          <div class="overlay-links">
-            <a href="#" class="overlay-link">Edit Class</a>
-            <a href="<?php echo ROOT ?>/" class="overlay-link">VLE Manage</a>
+            <button class="btn new-class-btn"><a href="<?php  echo ROOT ?>/CreateClass">New Class</a></button>
           </div>
         </div>
 
-        <!-- Wrapper for the original card content -->
-        <div class="card-content">
-          <div class="card-photo-section">Add photo</div>
-
-          <div class="card-details-section">
-            <div class="info-column">
-              <div class="info-row">
-                <span class="label">Class</span>
-                <span class="value"><?= htmlspecialchars($class->class_name) ?></span>
-              </div>
-
-              <div class="info-row">
-                <span class="label">Type</span>
-                <span class="value">
-                  <?= ($class->institute_id == null) ? "Individual Class" : "Institute Class" ?>
-                </span>
-              </div>
+        <div class="class-card">
+          <!-- The blue trapezium overlay (hidden by default) -->
+          <div class="card-overlay">
+            <div class="overlay-links">
+              <a href="#" class="overlay-link">Edit Class</a>
+              <a href="#" class="overlay-link">VLE Manage</a>
             </div>
+          </div>
 
-            <div class="timeline-column">
-              <div class="timeline-wrapper">
-                <span class="start-time-label"><?= htmlspecialchars($class->created_at) ?></span>
-                <div class="timeline-indicator indicator-2"></div>
-                <div class="progress-bar">
-                  <div class="progress-bar-fill"></div>
+          <!-- Wrapper for the original card content -->
+          <div class="card-content">
+            <div class="card-photo-section">Add photo</div>
+            <div class="card-details-section">
+              <div class="info-column">
+                <div class="info-row">
+                  <span class="label">Class</span>
+                  <span class="value">Maths</span>
+                </div>
+                <div class="info-row">
+                  <span class="label">Status</span>
+                  <span class="value">Complete</span>
+                </div>
+                <div class="info-row">
+                  <span class="label">Type</span>
+                  <span class="value">institute teacher</span>
+                </div>
+              </div>
+              <div class="timeline-column">
+                <div class="timeline-wrapper">
+                  <span class="start-time-label">Start time</span>
+                  <div class="timeline-indicator indicator-1"></div>
+                  <div class="timeline-indicator indicator-2"></div>
+                  <div class="progress-bar">
+                    <div class="progress-bar-fill"></div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    <?php endforeach; ?>
-  <?php else: ?>
-    <p>No classes found.</p>
-  <?php endif; ?>
-  <!-- ✅ Loop ends here -->
-</section>
+      </section>
 
       <!-- =================================================== -->
       <!-- ============== ADVERTISEMENT SECTION ============== -->
@@ -129,6 +119,7 @@
             <table class="ad-table">
               <thead>
                 <tr>
+                  <th>Poster</th>
                   <th>Ad ID</th>
                   <th>Date</th>
                   <th>Duration</th>
@@ -138,13 +129,12 @@
               </thead>
               <tbody>
                 <!-- First Row: Pending Status -->
-              <?php if (!empty($ads) && is_array($ads)): ?>
-              <?php foreach ($ads as $ad): ?>
                 <tr>
-                  <td><?= htmlspecialchars($ad->id) ?></td>
-                  <td><?= htmlspecialchars($ad->created_at) ?></td>
-                  <td><?= htmlspecialchars($ad->start_time) ."-". htmlspecialchars($ad->end_time) ?></td>
-                  <td><?= htmlspecialchars($ad->status) ?></td>
+                  <td><div class="poster-placeholder"></div></td>
+                  <td>AD543</td>
+                  <td>2025.09.08</td>
+                  <td>9:25 - 13:30</td>
+                  <td>Pending</td>
                   <td>
                     <div class="control-buttons">
                       <a href="#" class="control-link delete">Delete</a>
@@ -152,12 +142,21 @@
                     </div>
                   </td>
                 </tr>
-              <?php endforeach; ?>
-              <?php else: ?>
+                <!-- Second Row: Submit Status -->
                 <tr>
-                  <td colspan="5">No advertisement requests found.</td>
+                  <td><div class="poster-placeholder"></div></td>
+                  <td>AD543</td>
+                  <td>2025.09.08</td>
+                  <td>9:25 - 13:30</td>
+                  <td>Submit</td>
+                  <td>
+                    <div class="control-buttons">
+                      <a href="#" class="control-link delete">Delete</a>
+                      <a href="#" class="control-link show">Show</a>
+                    </div>
+                  </td>
                 </tr>
-              <?php endif; ?>
+                <!-- Add more rows here as needed -->
               </tbody>
             </table>
           </div>

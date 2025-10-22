@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
     input.type = "text";
     input.className = "form-input";
     input.placeholder = "Objective";
+    input.name = "learning_objectives[]";
     container.appendChild(input);
   }
 

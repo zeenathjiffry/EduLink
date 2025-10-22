@@ -2,95 +2,123 @@
 
 class Signup extends Controller
 {
+
     public function index()
     {
-        $data = [];
-        
-        // Check if the form was submitted (POST request)
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            
-            // 1. Instantiate the models
-            $account_model = new Account();
-            
-            // 2. Validate the data
-            // You would normally have a proper validation method here
-            if (empty($_POST['email']) || empty($_POST['password']) || empty($_POST['user_type'])) {
-                $data['errors'] = "Please fill in all required fields.";
-            } 
-            // Add more validation here (e.g., password length, unique email check)
-            
-            // 3. Process if no errors
-            if (!isset($data['errors'])) {
-                
-                $post_data = $_POST;
-                $user_type = $post_data['user_type'] ?? 'student'; // Default to 'student' if not set
-                
-                // --- Insert into 'account' table ---
-                $account_data = [
-                    'email' => $post_data['email'],
-                    'password' => $post_data['password'], 
-                    'user_type' => $user_type,
-                    'created_at' => date('Y-m-d H:i:s'),
-                ];
-                
-                // Hash the password *before* inserting
-                $account_data = $account_model->hashPassword($account_data);
-
-                // This must return the new account ID (lastInsertId)
-                $account_id = $account_model->insert($account_data); 
-                
-                if ($account_id) {
-                    
-                    // --- Insert into specific user table (Student, Teacher, or Institute) ---
-                    $specific_data = ['account_id' => $account_id];
-                    $specific_model = null;
-
-                    switch ($user_type) {
-                        case 'student':
-                            $specific_model = new Student();
-                            $specific_data['student_name'] = $post_data['name'] ?? '';
-                            $specific_data['grade'] = $post_data['grade'] ?? '';
-                            break;
-                            
-                        case 'teacher':
-                            $specific_model = new Teacher();
-                            $specific_data['teacher_name'] = $post_data['name'] ?? '';
-                            $specific_data['subject'] = $post_data['subject'] ?? '';
-                            break;
-
-                        case 'institute':
-                            $specific_model = new Institute();
-                            $specific_data['institute_name'] = $post_data['name'] ?? '';
-                            $specific_data['address'] = $post_data['address'] ?? '';
-                            break;
-                    }
-
-                    $success = $specific_model ? $specific_model->insert($specific_data) : false;
-
-                    if ($success) {
-                        
-                        // 4. Success: Log the user in and redirect (Post-Redirect-Get pattern)
-                        // Note: You need a User class or similar method to handle session creation
-                        // For simplicity, let's assume a basic session login:
-                        $_SESSION['user_id'] = $account_id;
-                        $_SESSION['user_type'] = $user_type;
-
-                        header('Location: ' . BASEURL . '/home');
-                        exit;
-                        
-                    } else {
-                        // 5. Cleanup/Rollback if the second insert failed
-                        $account_model->delete($account_id); 
-                        $data['errors'] = "Registration failed. Please try again.";
-                    }
-                } else {
-                    $data['errors'] = "Account creation failed. Email might be in use.";
-                }
-            }
-            
-            $data['post_data'] = $post_data ?? [];
-        }
-
+        $data = []; 
         $this->view('signup', $data);
     }
+
+    public function save_student_details()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_SESSION['new_account_id'])) {
+
+
+            $studentModel = new Student(); // This line will now work
+            $data = [
+                'account_id' => $_SESSION['new_account_id'],
+                'first_name' => $_POST['first_name'],
+                'last_name'  => $_POST['last_name'],
+                'school_name' => $_POST['school'], // ✅ match model
+                'address'    => $_POST['address'],
+                'stream'     => $_POST['stream']
+            ];
+
+            $studentModel->insert($data);
+           
+            $_SESSION['user_id'] = $_SESSION['new_account_id'];
+            $_SESSION['user_role'] = $_SESSION['new_account_role'];
+            $_SESSION['user_name'] = $_POST['first_name']; 
+            unset($_SESSION['new_account_id']);
+            unset($_SESSION['new_account_role']);
+            redirect('home'); 
+        } else {
+
+            redirect('signup');
+        }
+    }
+
+public function save_teacher_details()
+{
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_SESSION['new_account_id'])) {
+
+        $teacherModel = new Teacher();
+
+     
+        $uploadedFiles = handleFileUploads('files', 'teachers');
+        $filePaths = !empty($uploadedFiles) ? implode(',', $uploadedFiles) : '';
+
+      
+        $data = [
+            'account_id'             => $_SESSION['new_account_id'],
+            'first_name'             => $_POST['first_name'],
+            'last_name'              => $_POST['last_name'],
+            'email'                  => $_POST['contact_email'], 
+            'phone'                  => $_POST['phone'],
+            'subjects_taught'        => $_POST['subject'],
+            'approval_status'        => 'pending',
+            'approval_document_path' => $filePaths,
+            'approved_by_admin_id'   => null
+        ];
+        $teacherModel->insert($data);
+
+        $_SESSION['user_id']   = $_SESSION['new_account_id'];
+        $_SESSION['user_role'] = $_SESSION['new_account_role'];
+        
+        $_SESSION['user_name'] = $_POST['first_name'];
+
+        unset($_SESSION['new_account_id']);
+        unset($_SESSION['new_account_role']);
+
+
+        redirect('home');
+    } else {
+        redirect('signup');
+    }
+}
+
+   public function save_institute_details()
+{
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_SESSION['new_account_id'])) {
+
+        $instituteModel = new Institute();
+
+        // 1️⃣ Handle file uploads using global function
+        $uploadedFiles = handleFileUploads('files', 'institutes');
+        $filePaths = !empty($uploadedFiles) ? implode(',', $uploadedFiles) : null;
+
+        // 2️⃣ Collect form data
+        $data = [
+            'account_id'             => $_SESSION['new_account_id'],
+            'institute_name'         => $_POST['institute_name'],
+            'location'               => $_POST['address'], // matches table column
+            'contact_email'          => $_POST['contact_email'],
+            'contact_phone'          => $_POST['phone'],
+            'approval_status'        => 'pending',
+            'approval_document_path' => $filePaths,
+            'approved_by_admin_id'   => null
+        ];
+
+        // 3️⃣ Filter data using allowedColumns for safety
+        $data = array_intersect_key($data, array_flip($instituteModel->getAllowedColumns()));
+
+
+        // 4️⃣ Insert into DB
+        $instituteModel->insert($data);
+
+        // 5️⃣ Set session and redirect
+        $_SESSION['user_id']   = $_SESSION['new_account_id'];
+        $_SESSION['user_role'] = $_SESSION['new_account_role'];
+        $_SESSION['user_name'] = $_POST['institute_name'];
+
+        unset($_SESSION['new_account_id']);
+        unset($_SESSION['new_account_role']);
+
+        redirect('home');
+
+    } else {
+        redirect('signup');
+    }
+}
+
 }

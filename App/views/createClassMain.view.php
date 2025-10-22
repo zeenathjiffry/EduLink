@@ -50,22 +50,31 @@
             <div class="sidebar-footer">
         </aside>
 
-        <main class="main-content">
-            <!-- Intended Learners -->
+        <form method="POST" action="<?php echo ROOT ?>/CreateClass/save_class_details" enctype="multipart/form-data">
+
+
+            <!-- Intended Learners Section -->
             <section id="view-intended" class="view">
-            <?php include __DIR__.'/Component/createClassIntendedLearners.view.php';?>
+                <?php include __DIR__.'/Component/createClassIntendedLearners.view.php'; ?>
             </section>
-            
-            <!-- Basic Information -->
+
+            <!-- Basic Information Section -->
             <section id="view-core" class="view" hidden>
-               <?php include __DIR__.'/Component/createClassBasicInfo.view.php'; ?>
+                <?php include __DIR__.'/Component/createClassBasicInfo.view.php'; ?>
             </section>
-            
-            <!-- Advanced Information -->
+
+            <!-- Advanced Information Section -->
             <section id="view-advance" class="view" hidden>
-               <?php include __DIR__.'/Component/createClassAdvancedInfo.view.php'; ?>
+                <?php include __DIR__.'/Component/createClassAdvancedInfo.view.php'; ?>
             </section>
-        </main>
+
+            <!-- Submit Button -->
+      <div class="form-actions">
+            <button type="submit" class="btn-primary">Create Class</button>
+        </div>
+
+        </form>
+
     </div>
 
     <footer class="footer">

@@ -158,9 +158,6 @@
         </div>
 
         <!-- Action Buttons -->
-        <div class="form-actions">
-            <button type="button" class="btn-secondary">Save as Draft</button>
-            <button type="submit" class="btn-primary">Create Class</button>
-        </div>
+    
     </div>
     <script src="<?php  echo ROOT ?>/assets/js/component/createClassAdvancedInfo.js"></script>
