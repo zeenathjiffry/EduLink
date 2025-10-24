@@ -5,6 +5,8 @@ class Model extends Database
     protected $table = 'users';
     protected $limit = 10;
     protected $offset = 0;
+    protected $rules = []; 
+    public $validation_errors = [];
 
     
     public function where($data, $data_not = [])
@@ -81,7 +83,7 @@ class Model extends Database
         return false;
 
     }
-    public function insert($data)
+public function insert($data)
     {
         try
         {
@@ -91,7 +93,12 @@ class Model extends Database
 
             // Build the query
             $query = "INSERT INTO $this->table ($columns) VALUES (:$placeholders)"; 
-            $this->query($query,$data);   
+            
+            // --- THIS IS THE FIX ---
+            // You must *return* the result of the query.
+            // This will now be the lastInsertId (e.g., 1, 2, 3...) or false.
+            return $this->query($query, $data); 
+            // -----------------------
         }
         catch (PDOException $e) 
         {
@@ -99,8 +106,6 @@ class Model extends Database
             error_log("Database Error: " . $e->getMessage());
             return false;
         }
-
-        
     }
     public function update($id, $data, $id_column = 'id')
     {
@@ -128,4 +133,70 @@ class Model extends Database
 
         return $this->query($query, $params);
     }
-}
+
+ public function validate($data)
+    {
+        $this->validation_errors = []; 
+
+        if (empty($this->rules)) {
+            return true; 
+        }
+
+        foreach ($this->rules as $column => $rule_string) {
+            
+            $is_present = array_key_exists($column, $data);
+            $value = $is_present ? $data[$column] : '';
+            $rules = explode('|', $rule_string);
+            
+            foreach ($rules as $rule) {
+                
+                // 1. REQUIRED Rule
+                if ($rule === 'required' && (!$is_present || $value === '' || $value === null)) {
+                    $this->validation_errors[$column] = ucfirst(str_replace('_', ' ', $column)) . " is required.";
+                    break; 
+                }
+
+                if ((!$is_present || $value === '' || $value === null)) {
+                    continue; 
+                }
+
+                // 2. EMAIL Rule
+                if ($rule === 'email' && !filter_var($value, FILTER_VALIDATE_EMAIL)) {
+                    $this->validation_errors[$column] = ucfirst(str_replace('_', ' ', $column)) . " is not a valid email format.";
+                } 
+                
+                // 3. MAX Length Rule (e.g., max:255)
+                elseif (strpos($rule, 'max:') === 0) {
+                    $max = (int) explode(':', $rule)[1];
+                    if (strlen($value) > $max) {
+                        $this->validation_errors[$column] = ucfirst(str_replace('_', ' ', $column)) . " must be less than $max characters.";
+                    }
+                } 
+                
+                // 4. MIN Length Rule (e.g., min:6)
+                elseif (strpos($rule, 'min:') === 0) {
+                    $min = (int) explode(':', $rule)[1];
+                    if (strlen($value) < $min) {
+                        $this->validation_errors[$column] = ucfirst(str_replace('_', ' ', $column)) . " must be at least $min characters.";
+                    }
+                }
+                
+                // 5. NUMERIC Rule
+                elseif ($rule === 'numeric' && !is_numeric($value)) {
+                    $this->validation_errors[$column] = ucfirst(str_replace('_', ' ', $column)) . " must be a number.";
+                }
+                
+                // 6. ALPHA_DASH Rule (Letters, numbers, dashes, and underscores)
+                elseif ($rule === 'alpha_dash' && !preg_match('/^[a-zA-Z0-9_-]+$/', $value)) {
+                    $this->validation_errors[$column] = ucfirst(str_replace('_', ' ', $column)) . " can only contain letters, numbers, dashes, and underscores.";
+                }
+
+                if (isset($this->validation_errors[$column])) {
+                    break;
+                }
+            }
+        }
+        
+        return empty($this->validation_errors);
+    }
+    }

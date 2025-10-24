@@ -1,10 +1,15 @@
 :root {
   --primary-color: #1e2a5e;
   --secondary-color: #fed352;
-  --light-gray: #f4f4f9;
-  --text-color: #333;
-  --border-color: #d1d5db;
   --background-color: #f8f9fa;
+  --card-background: #ffffff;
+  --border-color: #d1d5db;
+  --text-color: #333;
+  --light-gray: #f4f4f9;
+  --shadow-color: rgba(30, 42, 94, 0.15);
+  --hover-color: #18224d;
+  --success-color: #28a745;
+  --error-color: #dc3545;
 }
 
 body {
@@ -347,4 +352,189 @@ body {
 .control-link:hover {
   background-color: var(--secondary-color);
   color: var(--primary-color);
+}
+
+body {
+  font-family: "Inter", Arial, sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  margin: 0;
+}
+
+/* Advertisement Modal */
+.adv-modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.adv-modal-content {
+  background-color: var(--card-background);
+  width: 100%;
+  max-width: 520px;
+  border-radius: 12px;
+  padding: 30px 25px;
+  box-shadow: 0 12px 28px var(--shadow-color);
+  position: relative;
+  animation: slideDown 0.3s ease-in-out;
+}
+
+@keyframes slideDown {
+  0% {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.adv-close-button {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 28px;
+  color: var(--text-color);
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.adv-close-button:hover {
+  color: var(--primary-color);
+}
+
+.adv-modal-content h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-bottom: 20px;
+  border-bottom: 3px solid var(--secondary-color);
+  padding-bottom: 10px;
+}
+
+/* Fieldset Styling */
+fieldset {
+  border: 1px solid var(--border-color);
+  padding: 20px;
+  margin-bottom: 25px;
+  border-radius: 10px;
+  background-color: var(--light-gray);
+}
+
+legend {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--primary-color);
+  padding: 0 10px;
+}
+
+/* Advertiser Details */
+.adv-advertiser-details p {
+  font-size: 0.95rem;
+  margin: 5px 0;
+}
+.adv-advertiser-details strong {
+  color: var(--primary-color);
+}
+
+/* Radio Buttons */
+.adv-placement-options label {
+  display: flex;
+  align-items: center;
+  padding: 8px 0;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+.adv-placement-options input[type="radio"] {
+  margin-right: 12px;
+  accent-color: var(--primary-color);
+}
+
+/* Time Inputs */
+.adv-time-selection {
+  margin-bottom: 20px;
+}
+.adv-time-selection label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--primary-color);
+}
+.adv-time-selection input[type="time"] {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  background-color: #fff;
+  transition: border-color 0.2s;
+}
+.adv-time-selection input[type="time"]:focus {
+  border-color: var(--primary-color);
+  outline: none;
+}
+
+/* File Upload */
+.adv-file-upload {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.adv-hidden-file-input {
+  display: none;
+}
+.adv-upload-label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--primary-color);
+  color: #fff;
+  padding: 10px 15px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background-color 0.2s, box-shadow 0.2s;
+}
+.adv-upload-label:hover {
+  background-color: var(--hover-color);
+  box-shadow: 0 4px 10px var(--shadow-color);
+}
+.adv-upload-icon {
+  margin-right: 8px;
+  font-size: 1.2em;
+}
+.adv-file-name {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+/* Submit Button */
+.adv-submit-button {
+  width: 100%;
+  padding: 12px 15px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  background-color: var(--secondary-color);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+.adv-submit-button:hover {
+  background-color: #f7c739;
+  transform: translateY(-1px);
 }
