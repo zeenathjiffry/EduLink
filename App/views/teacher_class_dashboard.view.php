@@ -61,8 +61,11 @@
         <!-- The blue trapezium overlay (hidden by default) -->
         <div class="card-overlay">
           <div class="overlay-links">
-            <a href="#" class="overlay-link">Edit Class</a>
-            <a href="<?php echo ROOT ?>/" class="overlay-link">VLE Manage</a>
+            
+            <a href="<?php echo ROOT ?>/EditClass/index/<?= $class->class_id ?>" class="overlay-link">Edit Class</a>
+            
+            <a href="<?php echo ROOT ?>/TeacherVle/index/<?= $class->class_id ?>" class="overlay-link">VLE Manage</a>
+
           </div>
         </div>
 
@@ -147,7 +150,16 @@
                   <td><?= htmlspecialchars($ad->status) ?></td>
                   <td>
                     <div class="control-buttons">
-                      <a href="#" class="control-link delete">Delete</a>
+                      <a 
+                        href="<?php echo ROOT ?>/ClassManager/delete_advertisement_request/<?= $ad->id ?>" 
+                        class="control-link delete"
+                        onclick="return confirm('Are you sure you want to delete this advertisement request?');"
+                        > Delete</a>
+                      <a 
+                          href="#" 
+                          class="control-link edit open-ad-modal" 
+                          data-ad-id="<?= $ad->id ?>"
+                      >Edit</a>
                       <a href="#" class="control-link show">Show</a>
                     </div>
                   </td>
@@ -172,6 +184,7 @@
 
       
               <form method="POST" action="<?php echo ROOT; ?>/ClassManager/save_advertisement_request" enctype="multipart/form-data" id="adRequestForm">
+                    <input type="hidden" name="ad_id" id="ad_id" value="">
                     <input type="hidden" name="advertiser_name" value="TechZone Tutors">
                     <input type="hidden" name="advertiser_contact" value="contact@techzone.com">
 
@@ -220,7 +233,12 @@
     </div>
 </div>
     </div>
+
+    
         <?php include __DIR__.'/Component/footer.view.php'; ?>
+        <script>
+            const appRoot = "<?php echo ROOT; ?>";
+        </script>
         <script src="<?php echo ROOT ?>\assets\js\component\adPopUp.js"></script>
         
   </body>

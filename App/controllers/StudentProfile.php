@@ -15,9 +15,8 @@ public function index()
         redirect('login');
         exit();
     }
-
-    // 3️⃣ Fetch account events
     $accountId = $_SESSION['USER']['account_id'];
+    
     $eventModel = new Event();
     $events = $eventModel->where(['account_id' => $accountId]);
 
@@ -30,17 +29,19 @@ public function index()
 }
 
 
-    
 public function save_event()
 {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-
-        $accountId = $_SESSION['user_id'] ?? null; 
+        if (session_status() === PHP_SESSION_NONE) session_start();
+        error_log("Save Event Called. Session User: " . print_r($_SESSION['USER'] ?? 'Not Set', true));
+        $accountId = $_SESSION['USER']['account_id'] ?? null;
+         
 
         if (!$accountId) {
             $_SESSION['error'] = "User not identified.";
-            redirect('StudentProfileController/index');
+            redirect('StudentProfile/index');
+            exit;
         }
 
         $eventModel = new Event();
@@ -65,5 +66,76 @@ public function save_event()
         redirect('StudentProfile/index');
     }
 }
+public function delete_event()
+{
+    if (session_status() === PHP_SESSION_NONE) session_start();
+
+    $accountId = $_SESSION['USER']['account_id'] ?? null;  
+    $eventId   = $_POST['event_id'] ?? null; 
+
+    if (!$accountId || !$eventId) {
+        echo "Missing data";
+        return;
+    }
+
+    $eventModel = new Event();
+    
+    $conditions = [
+        'account_id' => $accountId,
+        'id' => $eventId
+    ];
+
+ 
+    $eventModel->delete($conditions); 
+
+    echo "success";
+    
+    exit; 
+}
+public function update_event()
+{
+    if (session_status() === PHP_SESSION_NONE) session_start();
+
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        echo "Invalid request";
+        exit;
+    }
+
+    $accountId = $_SESSION['USER']['account_id'] ?? null;
+    $eventId   = $_POST['event_id'] ?? null;
+
+    if (!$accountId || !$eventId) {
+        echo "Missing data";
+        exit;
+    }
+
+    $eventModel = new Event();
+
+    $event = $eventModel->first([
+        'id' => $eventId,
+        'account_id' => $accountId
+    ]);
+
+    if ($event) {
+        
+        $data = [
+            'event_title'       => $_POST['event_title'] ?? '',
+            'event_time'        => empty($_POST['event_time']) ? null : $_POST['event_time'],
+            'event_description' => $_POST['event_description'] ?? '',
+            'event_date'        => $_POST['event_date'] ?? date('Y-m-d'),
+        ];
+
+        if ($eventModel->update($eventId, $data) !== false) {
+            echo "success";
+        } else {
+            echo "Failed to update";
+        }
+    } else {
+        echo "Permission denied";
+    }
+
+    exit; // prevent extra HTML
+}
+
 
 }

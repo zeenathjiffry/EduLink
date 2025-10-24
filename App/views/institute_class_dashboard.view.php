@@ -48,20 +48,18 @@
               </button>
             </div>
 
-            <button class="btn new-class-btn"><a href="<?php  echo ROOT ?>/CreateClass">New Class</a></button>
+            <button class="btn new-class-btn"><a href="<?php  echo ROOT ?>/InstituteClassCreate">New Class</a></button>
           </div>
         </div>
 
         <div class="class-card">
-          <!-- The blue trapezium overlay (hidden by default) -->
           <div class="card-overlay">
             <div class="overlay-links">
               <a href="#" class="overlay-link">Edit Class</a>
-              <a href="#" class="overlay-link">VLE Manage</a>
+              <a href="<?php  echo ROOT ?>/ClassMgt" class="overlay-link">Class Manage</a>
             </div>
           </div>
 
-          <!-- Wrapper for the original card content -->
           <div class="card-content">
             <div class="card-photo-section">Add photo</div>
             <div class="card-details-section">
@@ -98,7 +96,6 @@
       <!-- ============== ADVERTISEMENT SECTION ============== -->
       <!-- =================================================== -->
       <section class="advertisement-section">
-        <!-- The introductory text you provided -->
         <p class="advertisement-description">
           This section is dedicated to teachers who wish to promote their
           classes or tutoring services. You can create advertisements to
@@ -110,12 +107,10 @@
         <div class="advertisement-request-panel">
           <h3 class="section-title">Advertisement Requests</h3>
           <div class="advertisement-container">
-            <!-- "+ Advertisement" Button -->
             <button id="openAdModalBtn" class="add-ad-button">
               <span class="plus-icon">+</span> Advertisement
             </button>
 
-            <!-- Advertisement Table -->
             <table class="ad-table">
               <thead>
                 <tr>
@@ -128,7 +123,6 @@
                 </tr>
               </thead>
               <tbody>
-                <!-- First Row: Pending Status -->
                 <tr>
                   <td><div class="poster-placeholder"></div></td>
                   <td>AD543</td>
@@ -142,7 +136,6 @@
                     </div>
                   </td>
                 </tr>
-                <!-- Second Row: Submit Status -->
                 <tr>
                   <td><div class="poster-placeholder"></div></td>
                   <td>AD543</td>
@@ -156,7 +149,6 @@
                     </div>
                   </td>
                 </tr>
-                <!-- Add more rows here as needed -->
               </tbody>
             </table>
           </div>

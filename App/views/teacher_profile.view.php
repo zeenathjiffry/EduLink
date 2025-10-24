@@ -82,7 +82,7 @@
             </div>
             <div class="stat-card">
               <p>Monthly Revenue</p>
-              <span>$3,200</span>
+              <span>Rs3,200</span>
               <i class="fa-solid fa-dollar-sign icon-blue"></i>
             </div>
           </div>
@@ -247,7 +247,6 @@
         <section id="my-calendar" class="content-section">
           <div class="content-header">
             <h1><i class="fa-regular fa-calendar"></i> My Calendar</h1>
-            <p>This section is under construction.</p>
             <?php include __DIR__.'/Component/calander.php'; ?>
           </div>
         </section>

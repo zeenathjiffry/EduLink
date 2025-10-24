@@ -60,7 +60,7 @@
         <!-- ======================================== -->
         <section id="settings" class="content-section active">
           <div class="profile-card">
-            <div class="profile-avatar">JA</div>
+            <div class="profile-avatar"></div>
             <div class="profile-info">
               <h2>EduLink Institute</h2>
               <button class="btn btn-secondary">Edit Profile</button>
@@ -85,7 +85,7 @@
             </div>
             <div class="stat-card">
               <p>Monthly Revenue</p>
-              <span>$12,500</span>
+              <span>Rs12,500</span>
               <i class="fa-solid fa-dollar-sign icon-yellow"></i>
             </div>
           </div>
@@ -262,10 +262,8 @@
           <section id="my-calendar" class="content-section">
           <div class="content-header">
             <h1><i class="fa-regular fa-calendar"></i> Institute Calendar</h1>
-            <p>This section is under construction.</p>
           </div>
           <div class="calendar-placeholder">
-            <p>Your calendar will be displayed here.</p>
             <?php include __DIR__.'/Component/calander.php'; ?>
           </div>
         </section>

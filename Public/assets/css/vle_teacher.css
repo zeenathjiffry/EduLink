@@ -297,3 +297,116 @@ body {
 .grading-section .import-btn:hover {
   background-color: #2a3a8a;
 }
+/* =================================== */
+/* File Item & Action Button Styles    */
+/* =================================== */
+/* This styles the buttons INSIDE .file-actions */
+.file-actions .icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 5px;
+  color: #555;
+}
+
+/* This colors the edit button blue */
+.file-actions .icon-btn.edit {
+  color: #007bff;
+}
+
+/* This colors the delete button red */
+.file-actions .icon-btn.delete {
+  color: #dc3545;
+}
+
+/* This adds a hover effect */
+.file-actions .icon-btn:hover {
+  opacity: 0.7;
+}
+.file-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  margin: 8px 0;
+  border: 1px solid #cbd2e0;
+  border-radius: 10px;
+  width: 100%; /* <-- THIS IS THE FIX */
+  transition: 0.2s;
+  box-sizing: border-box;
+}
+
+.file-item:hover {
+  background-color: #f5f6fa;
+}
+
+.file-item-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-grow: 1;
+  min-width: 0;
+}
+
+.file-icon {
+  font-size: 22px;
+  color: #1d2a64;
+}
+
+.file-item-info-text {
+  min-width: 0;
+}
+
+.file-name {
+  color: #1d2a64;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  text-decoration: none;
+}
+
+.file-description {
+  font-size: 0.85em;
+  color: #666;
+  margin-top: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* New styles for simple text buttons */
+.vle-content-actions {
+  display: flex;
+  gap: 8px;
+  padding-left: 10px;
+}
+
+.vle-text-button {
+  background: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  padding: 4px 8px;
+  font-weight: 600;
+  transition: background-color 0.2s;
+}
+
+.vle-text-button.edit-btn {
+  color: #007bff;
+  border-color: #007bff;
+}
+.vle-text-button.edit-btn:hover {
+  background-color: #f0f8ff; /* Light blue */
+}
+
+.vle-text-button.delete-btn {
+  color: #dc3545;
+  border-color: #dc3545;
+}
+.vle-text-button.delete-btn:hover {
+  background-color: #fff0f1; /* Light red */
+}

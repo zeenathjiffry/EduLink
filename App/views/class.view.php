@@ -14,7 +14,7 @@
 </head>
 <body>
   <?php include __DIR__.'/Component/nav.view.php'; ?>
-<header class="course-banner" style="background-image: url('<?php echo ROOT ?>/assets/images/class-thumbnail.png');">
+<header class="course-banner" style="background-image: url('<?php echo ROOT ?>/assets/images/edu.png');">
     <div class="banner-overlay">
         <div class="banner-content">
             <div class="class-type-indicator">Institute Class</div>
@@ -33,11 +33,12 @@
             
             <section class="course-section">
                 <h2>A Message from Your Teacher</h2>
-                <div class="video-placeholder">
-                    <p>Welcome Video Here</p>
+                <div class="video-container"> <video width="100%" controls>
+                        <source src="<?php echo ROOT ?>/assets/videos/Tuition_Class.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
                 </div>
             </section>
-
             <section class="course-section">
                 <h2>Class Schedule</h2>
                 <div class="schedule-list">
