@@ -5,13 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EduLink-Class-Academic Details</title>
     <link rel="stylesheet" href="<?php  echo ROOT ?>/assets/css/class_details.css">
-
-
+    <link href="<?php  echo ROOT ?>/assets/css/component/nav.css" rel="stylesheet" />
+    
 </head>
 <body>
-<body>
 
-    <aside class="sidebar">
+<?php include __DIR__.'/Component/nav.view.php'; ?>
+    <div class="dashboard">
+        <aside class="sidebar">
         <div class="sidebar-header">
             <span class="menu-icon">&#9776;</span>
             <span>Dashboard</span>
@@ -222,6 +223,7 @@
             </div>
         </div>
     </main>
+    </div>
     <script src="<?php  echo ROOT ?>/assets/js/component/class_details.js"></script>
 
 </body>
