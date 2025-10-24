@@ -7,8 +7,7 @@
           >
           <h2>Create Document</h2>
 
-          <form id="documentForm" onsubmit="return false;">
-            <div class="form-group">
+           <form id="documentForm" method="POST" enctype="multipart/form-data" action="<?= ROOT ?>/TeacherVle/uploadDocument">            <div class="form-group">
               <label for="docName">Document Name:</label>
               <input type="text" id="docName" name="docName" required />
             </div>
@@ -45,7 +44,7 @@
             </div>
 
             <div class="popup-buttons">
-              <button type="submit" onclick="uploadDocument()">Upload</button>
+              <button type="submit">Upload</button>
               <button type="button" onclick="closeCreatePopup('documentPopup')">
                 Cancel
               </button>
