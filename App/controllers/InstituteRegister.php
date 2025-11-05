@@ -10,46 +10,37 @@ class InstituteRegister extends Controller
             
             $accountModel = new Account();
             
-            // 1. Validate the POST data
             if ($accountModel->validate($_POST)) {
                 
-                // 2. If validation passes, prepare data
                 $data = [
                     'email' => $_POST['email'],
-
-                    // --- THIS IS THE FIX ---
-                    // Use the correct database column names
                     'password_hash' => password_hash($_POST['password'], PASSWORD_DEFAULT),
                     'account_type'  => $_POST['role']
-                    // -----------------------
+     
                 ];
 
-                // 3. Insert into 'account' table
                 $account_id = $accountModel->insert($data); 
 
                 if($account_id) {
-                    // SUCCESS: Start session and save the ID
-                    $_SESSION['new_account_id'] = $account_id;
-                    $_SESSION['new_account_role'] = $_POST['role']; // Save the selected role
+                    $newlyCreatedAccount = $accountModel->first(['email' => $data['email']]);
+                    $newAccountId = $newlyCreatedAccount->account_id;
+                    $_SESSION['new_account_id'] = $newAccountId;
+                    $_SESSION['new_account_role'] = $data['account_type']; 
 
-                    // Load the institute details view
                     $this->view('institute_register');
-                    return; // Stop the script here
+                    return; 
                 } else {
                     $data['errors'] = ['account' => 'Database error. Could not create account.'];
                 }
 
             } else {
-                // 4. If validation fails, get the errors
                 $data['errors'] = $accountModel->validation_errors;
             }
             
-            // 5. If we are here, it's because validation or insert failed.
            print_r($data['errors']);
             $this->view('signup', $data);
 
         } else {
-            // GET request
             $this->view('institute_register');
         }
     }

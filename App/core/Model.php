@@ -83,56 +83,81 @@ class Model extends Database
         return false;
 
     }
-public function insert($data)
-    {
-        try
-        {
-            $keys = array_keys($data);
-            $columns = implode(",", $keys);
-            $placeholders = implode(",:", $keys);
+    public function insert($data)
+{
+    if (empty($data) || !is_array($data)) {
+        error_log("Insert Error: Invalid data provided.");
+        return false;
+    }
 
-            // Build the query
-            $query = "INSERT INTO $this->table ($columns) VALUES (:$placeholders)"; 
-            
-            // --- THIS IS THE FIX ---
-            // You must *return* the result of the query.
-            // This will now be the lastInsertId (e.g., 1, 2, 3...) or false.
-            return $this->query($query, $data); 
-            // -----------------------
-        }
-        catch (PDOException $e) 
-        {
-            // Log error in production instead of echoing
-            error_log("Database Error: " . $e->getMessage());
+    $keys = array_keys($data);
+    $columns = implode(',', $keys);
+    $placeholders = implode(',', array_map(fn($key) => ":$key", $keys));
+
+    $query = "INSERT INTO {$this->table} ({$columns}) VALUES ({$placeholders})";
+    try {
+        $con = $this->connect();
+        if (!$con) {
+            error_log("Insert Error: Failed to connect to database.");
             return false;
         }
-    }
-    public function update($id, $data, $id_column = 'id')
-    {
 
-    }
-    public function delete($id, $data = null, $id_column = 'id') 
-    {
-        // Validate input
-        if (empty($id)) {
-            throw new InvalidArgumentException("ID cannot be empty!");
+        $stm = $con->prepare($query);
+        $success = $stm->execute($data);
+
+        if (!$success) {
+            error_log("Database Insert Error: " . print_r($stm->errorInfo(), true));
+            return false;
         }
 
-        $conditions = ["$id_column = :$id_column"];
-        $params = [":$id_column" => $id];
+        return true; 
 
-        // Add additional conditions if provided
-        if ($data !== null && is_array($data)) {
-            foreach ($data as $key => $value) {
-                $conditions[] = "$key = :$key";
-                $params[":$key"] = $value;
-            }
+    } catch (PDOException $e) {
+        error_log("PDO Exception during insert: " . $e->getMessage());
+        return false;
+    }
+}
+public function update($id, $data, $id_column = 'id')
+    {
+        if (empty($data) || !is_array($data)) {
+            // Invalid data provided
+            return false;
         }
 
-        $query = "DELETE FROM $this->table WHERE " . implode(' AND ', $conditions);
+        $setClauses = [];
+        $params = [];
+
+        foreach ($data as $key => $value) {
+            $setClauses[] = "`$key` = :$key";
+            $params[":$key"] = $value;
+        }
+
+        $params[":" . $id_column] = $id;
+
+        $query = "UPDATE `{$this->table}` SET " . implode(', ', $setClauses) . " WHERE `$id_column` = :$id_column";
+        
+        return $this->query($query, $params);
+    }
+
+    public function delete($conditions)
+    {
+        if (empty($conditions) || !is_array($conditions)) {
+            throw new InvalidArgumentException("Conditions must be provided as an associative array.");
+        }
+
+        $whereClauses = [];
+        $params = [];
+
+        foreach ($conditions as $key => $value) {
+            $whereClauses[] = "$key = :$key";
+            $params[":$key"] = $value;
+        }
+
+        $query = "DELETE FROM {$this->table} WHERE " . implode(' AND ', $whereClauses);
 
         return $this->query($query, $params);
     }
+
 
  public function validate($data)
     {

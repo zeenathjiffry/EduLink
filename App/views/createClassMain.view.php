@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="<?php  echo ROOT ?>/assets/css/component/createClassBasicInfo.css">
     <link rel="stylesheet" href="<?php  echo ROOT ?>/assets/css/component/createClassIntendedLearners.css">
     <link rel="stylesheet" href="<?php  echo ROOT ?>/assets/css/component/createClassAdvancedInfo.css">
-    
+    <link href="<?php  echo ROOT ?>/assets/css/component/nav.css" rel="stylesheet" />
     <link rel="stylesheet" href="<?php  echo ROOT ?>/assets/css/component/createClassHeader.css">
             <link
       href="<?php  echo ROOT ?>/assets/css/component/footer-styles.css"
@@ -18,7 +18,11 @@
 </head>
 
 <body>
- <?php include __DIR__ . '/Component/createClassHeader.php';?>
+    <?php 
+    ($_SESSION['USER']['role'] == 'institute') 
+        ? include __DIR__ . '/Component/createClassHeader.php' 
+        : include __DIR__ . '/Component/nav.view.php';
+    ?>
 
     <div class="container">
         <aside class="sidebar">
@@ -50,7 +54,7 @@
             <div class="sidebar-footer">
         </aside>
 
-        <form method="POST" action="<?php echo ROOT ?>/CreateClass/save_class_details" enctype="multipart/form-data">
+        <form class="main-content " method="POST" action="<?php echo ROOT ?>/CreateClass/save_class_details" enctype="multipart/form-data">
 
 
             <!-- Intended Learners Section -->
@@ -66,12 +70,13 @@
             <!-- Advanced Information Section -->
             <section id="view-advance" class="view" hidden>
                 <?php include __DIR__.'/Component/createClassAdvancedInfo.view.php'; ?>
+                            <!-- Submit Button -->
+                <div class="form-actions">
+                    <button type="submit" class="btn-next-core">Create Class</button>
+                </div>
+
             </section>
 
-            <!-- Submit Button -->
-      <div class="form-actions">
-            <button type="submit" class="btn-primary">Create Class</button>
-        </div>
 
         </form>
 

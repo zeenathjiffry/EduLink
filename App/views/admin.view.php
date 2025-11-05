@@ -17,7 +17,7 @@
 
   <div class="admin-layout">
     <aside class="sidebar">
-      <div class="sidebar-header">Dashboard VLE</div>
+      <div class="sidebar-header">Admin Panel</div>
       <ul class="nav-list">
         <li class="nav-item active">
           <a href="#" data-target="analytics-view">Analytics</a>

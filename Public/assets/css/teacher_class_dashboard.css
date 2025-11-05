@@ -77,7 +77,7 @@ body {
   justify-content: center;
 }
 
-.btn {
+.controls-container .btn {
   padding: 10px 20px;
   font-size: 16px;
   font-weight: bold;
@@ -85,18 +85,22 @@ body {
   border-radius: 5px;
   cursor: pointer;
   transition: opacity 0.3s;
-}
-
-.btn:hover {
-  opacity: 0.9;
-}
-
-.new-class-btn {
   background-color: var(--primary-color);
   color: white;
 }
 
-/* --- CLASS CARD --- */
+.controls-container .btn:hover {
+  opacity: 0.9;
+}
+
+.controls-container .new-class-btn {
+  background-color: var(--primary-color);
+  color: white;
+}
+.controls-container .new-class-btn a {
+  color: white;
+  text-decoration: none;
+}
 .class-card {
   display: flex;
   width: 50%;
@@ -214,7 +218,6 @@ body {
   right: 0;
 }
 
-/* --- HOVER OVERLAY ANIMATION --- */
 .card-overlay {
   position: absolute;
   top: 0;
@@ -248,23 +251,21 @@ body {
   opacity: 0.8;
 }
 
-/* --- ADVERTISEMENT SECTION --- */
 .advertisement-section .section-title {
   margin-bottom: 25px;
 }
 
-/* UPDATED advertisement description for left alignment */
 .advertisement-description {
   line-height: 1.6;
   color: #555;
-  margin: 0 0 30px 0; /* Removed auto horizontal margin, added bottom margin */
-  text-align: left; /* Changed from center to left */
+  margin: 0 0 30px 0;
+  text-align: left;
 }
 
 .advertisement-request-panel {
   background-color: #ffffff;
   padding: 30px;
-  border: 1px solid var(--border-color); /* Added border to match image */
+  border: 1px solid var(--border-color);
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
@@ -537,4 +538,31 @@ legend {
 .adv-submit-button:hover {
   background-color: #f7c739;
   transform: translateY(-1px);
+}
+.apply-marking-btn {
+  background-color: var(--secondary-color, #fed352);
+  color: var(--primary-color, #1e2a5e);
+  font-weight: 600;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(30, 42, 94, 0.15);
+  display: inline-block;
+  text-align: center;
+  letter-spacing: 0.5px;
+}
+
+.apply-marking-btn:hover {
+  background-color: var(--primary-color, #1e2a5e);
+  color: var(--secondary-color, #fed352);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(30, 42, 94, 0.25);
+}
+
+.apply-marking-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 6px rgba(30, 42, 94, 0.2);
 }

@@ -1,4 +1,3 @@
-
 .container {
   display: flex;
   min-height: calc(100vh - 80px);
@@ -90,3 +89,6 @@
   overflow-y: auto;
 }
 
+.form-actions[hidden] {
+  display: none;
+}

@@ -2,7 +2,7 @@
 
 class Teacher extends Model
 {
-    protected $table = 'Teachers';
+    protected $table = 'teachers';
     
     // Rules for the text fields
     protected $rules = [
@@ -15,6 +15,7 @@ class Teacher extends Model
 
     // Allowed columns for insert/update
     protected $allowedColumns = [
+        'teacher_id',
         'account_id',
         'first_name',
         'last_name',
@@ -25,6 +26,10 @@ class Teacher extends Model
         'approval_document_path',
         'approved_by_admin_id'
     ];
+        public function getAllowedColumns()
+    {
+        return $this->allowedColumns;
+    }
 
 
     // Override validate() to add the file check

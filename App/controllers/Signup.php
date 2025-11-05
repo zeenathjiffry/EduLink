@@ -26,12 +26,21 @@ class Signup extends Controller
 
             $studentModel->insert($data);
            
-            $_SESSION['user_id'] = $_SESSION['new_account_id'];
-            $_SESSION['user_role'] = $_SESSION['new_account_role'];
-            $_SESSION['user_name'] = $_POST['first_name']; 
-            unset($_SESSION['new_account_id']);
-            unset($_SESSION['new_account_role']);
-            redirect('home'); 
+        $_SESSION['USER'] = [
+            'account_id' => $_SESSION['new_account_id'],
+            'role' => $_SESSION['new_account_role'],
+            'first_name' => $_POST['first_name'] ?? ($_POST['institute_name'] ?? 'User') 
+        ];
+        $student = $studentModel->first(['account_id' => $_SESSION['USER']['account_id']]);
+        if ($student)
+        {
+            $_SESSION['USER']['student_id'] = $student->student_id;
+        }                
+        // Unset the temporary variables
+        unset($_SESSION['new_account_id']);
+        unset($_SESSION['new_account_role']);
+
+        redirect('home');
         } else {
 
             redirect('signup');
@@ -43,8 +52,6 @@ public function save_teacher_details()
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_SESSION['new_account_id'])) {
 
         $teacherModel = new Teacher();
-
-     
         $uploadedFiles = handleFileUploads('files', 'teachers');
         $filePaths = !empty($uploadedFiles) ? implode(',', $uploadedFiles) : '';
 
@@ -56,20 +63,26 @@ public function save_teacher_details()
             'email'                  => $_POST['contact_email'], 
             'phone'                  => $_POST['phone'],
             'subjects_taught'        => $_POST['subject'],
-            'approval_status'        => 'pending',
+            'approval_status'        => 'approved',
             'approval_document_path' => $filePaths,
             'approved_by_admin_id'   => null
         ];
+        $data = array_intersect_key($data, array_flip($teacherModel->getAllowedColumns()));
         $teacherModel->insert($data);
+        $_SESSION['USER'] = [
+            'account_id' => $_SESSION['new_account_id'],
+            'role' => $_SESSION['new_account_role'],
+            'first_name' => $_POST['first_name'] ?? ($_POST['institute_name'] ?? 'User') 
 
-        $_SESSION['user_id']   = $_SESSION['new_account_id'];
-        $_SESSION['user_role'] = $_SESSION['new_account_role'];
-        
-        $_SESSION['user_name'] = $_POST['first_name'];
+        ];
+        $teacher = $teacherModel->first(['account_id' => $_SESSION['USER']['account_id']]);
+        if ($teacher)
+        {
+            $_SESSION['USER']['teacher_id'] = $teacher->teacher_id;
+        }      
 
         unset($_SESSION['new_account_id']);
         unset($_SESSION['new_account_role']);
-
 
         redirect('home');
     } else {
@@ -91,25 +104,30 @@ public function save_teacher_details()
         $data = [
             'account_id'             => $_SESSION['new_account_id'],
             'institute_name'         => $_POST['institute_name'],
-            'location'               => $_POST['address'], // matches table column
+            'location'               => $_POST['address'], 
             'contact_email'          => $_POST['contact_email'],
             'contact_phone'          => $_POST['phone'],
-            'approval_status'        => 'pending',
+            'approval_status'        => 'approved',
             'approval_document_path' => $filePaths,
             'approved_by_admin_id'   => null
         ];
 
-        // 3️⃣ Filter data using allowedColumns for safety
         $data = array_intersect_key($data, array_flip($instituteModel->getAllowedColumns()));
 
 
-        // 4️⃣ Insert into DB
         $instituteModel->insert($data);
 
-        // 5️⃣ Set session and redirect
-        $_SESSION['user_id']   = $_SESSION['new_account_id'];
-        $_SESSION['user_role'] = $_SESSION['new_account_role'];
-        $_SESSION['user_name'] = $_POST['institute_name'];
+        $_SESSION['USER'] = [
+            'account_id' => $_SESSION['new_account_id'],
+            'role' => $_SESSION['new_account_role'],
+            'first_name' => $_POST['first_name'] ?? ($_POST['institute_name'] ?? 'User') 
+        ];
+        $institute = $instituteModel->first(['account_id' => $_SESSION['USER']['account_id']]);
+        if ($institute)
+        {
+            $_SESSION['USER']['institute_id'] = $institute->institute_id;
+        }      
+
 
         unset($_SESSION['new_account_id']);
         unset($_SESSION['new_account_role']);

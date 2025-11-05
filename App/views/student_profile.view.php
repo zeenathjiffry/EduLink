@@ -58,7 +58,7 @@
           <div class="profile-card">
             <div class="profile-avatar">KG</div>
             <div class="profile-info">
-              <h2>Kevin Gilbert</h2>
+              <h2>sman kumara</h2>
               <button class="btn btn-secondary">Edit Profile</button>
             </div>
           </div>
@@ -81,7 +81,7 @@
             </div>
             <div class="stat-card">
               <p>Total Spent</p>
-              <span>$2,450</span>
+              <span>Rs2,450</span>
               <i class="fa-solid fa-dollar-sign icon-yellow"></i>
             </div>
           </div>
@@ -337,7 +337,6 @@
             <p>Stay organized with your upcoming classes and events</p>
           </div>
           <div class="calendar-placeholder">
-            <p>Your calendar will be displayed here.</p>
             <?php include __DIR__.'/Component/calander.php'; ?>
           </div>
         </section>

@@ -13,11 +13,12 @@ body {
   margin: 0;
   font-family: "Poppins", sans-serif;
   background-color: var(--background-color);
+}
+.dashboard {
   display: flex;
   height: 100vh;
   overflow: hidden;
 }
-
 /* --- Sidebar Navigation --- */
 .sidebar {
   width: 260px;
